@@ -15,13 +15,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CoinListViewModel @Inject constructor(
-    private val geCoinRepositoryImpl: CoinRepositoryImpl,
-
-    ) : BaseViewModel<CoinListState>()  {
-
-
-
-        val  currentStockPriceAsLiveData: LiveData<CoinListState>  = geCoinRepositoryImpl().map { result ->
+    geCoinRepositoryImpl: CoinRepositoryImpl,
+ ) : BaseViewModel<CoinListState>()  {
+         val  currentStockPriceAsLiveData: LiveData<CoinListState>  = geCoinRepositoryImpl.getAllCoins().map { result ->
             CoinListState.Success(result.data ?: emptyList()) as CoinListState
         }.onStart {
             emit(CoinListState.Loading)

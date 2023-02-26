@@ -1,7 +1,7 @@
 package com.example.cryptocurrencywalletapp.domain.model
 
 data class Coin( val id: String,
-                    val isActive: Boolean,
+                    val isCrypto: Int,
                     val name: String,
                     val price: Double,
 
