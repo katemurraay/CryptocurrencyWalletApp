@@ -1,7 +1,12 @@
 package com.example.cryptocurrencywalletapp.data.repository
 
+import android.util.Log
+import androidx.room.withTransaction
+import com.example.cryptocurrencywalletapp.data.local.CryptoDatabase
+import com.example.cryptocurrencywalletapp.data.mapper.toCoin
+import com.example.cryptocurrencywalletapp.data.mapper.toCoinEntity
+import com.example.cryptocurrencywalletapp.data.mapper.toCoinExchange
 import com.example.cryptocurrencywalletapp.data.remote.CoinAPI
-import com.example.cryptocurrencywalletapp.data.remote.dto.CoinDTO
 import com.example.cryptocurrencywalletapp.data.remote.dto.CoinExchangeDTO
 import com.example.cryptocurrencywalletapp.domain.model.Coin
 import com.example.cryptocurrencywalletapp.domain.model.CoinExchange
@@ -12,48 +17,65 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
-import kotlin.math.roundToInt
 
 class CoinRepositoryImpl @Inject constructor(
-    private val api: CoinAPI
+    private val api: CoinAPI,
+    private val db: CryptoDatabase
 ) : CoinRepository {
 
-    fun CoinDTO.toCoin(): Coin {
-        return Coin(
-            id = assetId,
-            isCrypto = isCrypto,
-            name = name,
-            price = (price * 10000.0).roundToInt() / 10000.0,)
-    }
-    fun CoinExchangeDTO.toCoinExchange(): CoinExchange {
-        return CoinExchange(
-            id = assetIdBase,
-            rates = rates
-        )
-    }
-    override suspend fun getCoins(): MutableList<CoinDTO> {
-        return api.getCoins()
-    }
+    private val dao = db.getCoinDao()
+
+
+    override  fun getAllCoins(): Flow<Resource<List<Coin>>>{
+        return flow{
+
+                emit(Resource.Loading())
+                val coinListing = dao.getCoins()
+
+                emit(Resource.Success(
+                    data = coinListing.map { it.toCoin() }
+                ))
+
+
+               try{
+                    val response = api.getCoins().toList()
+                    db.withTransaction {
+                        dao.clearCoinListings()
+                        val coinEntities = response.map{it.toCoinEntity()}
+                        dao.insertCoinListings(coinEntities)
+                    }
+                   val coins = dao.getCoins().map{it.toCoin()}
+                   Log.d("DB_COINS", coins.toString())
+                   emit(Resource.Success(
+                      data=coins
+                   ))
+
+
+                }catch (e: IOException){
+                    e.printStackTrace()
+                    emit(Resource.Error( "No service. Check your internet connection"))
+                    null
+                }catch (e: HttpException){
+                    e.printStackTrace()
+                    emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
+                    null
+
+                 }
+
+
+
+
+                }
+
+        }
 
 
     override suspend fun getCoinExchange(coinId: String): CoinExchangeDTO {
         return api.getCoinExchangeInfo(coinId)
     }
 
-    fun getAllCoins(): Flow<Resource<List<Coin>>> = flow{
-        try {
-            emit(Resource.Loading())
-            val coins =  api.getCoins().map {it.toCoin()}
-            val mutableCoins = coins.toMutableList()
-            mutableCoins.removeAll{ it.isCrypto!=1 }
-            val data = mutableCoins.toList()
-            emit(Resource.Success(data))
-        } catch (e: HttpException){
-            emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
-        } catch (e: IOException){
-            emit(Resource.Error( "No service. Check your internet connection"))
-        }
-    }
+
+
 
 
     fun getCoinExchangeInfo(coinId: String): Flow<Resource<CoinExchange>> = flow{

@@ -1,12 +1,17 @@
 package com.example.cryptocurrencywalletapp.presentation
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import com.example.cryptocurrencywalletapp.R
 import com.example.cryptocurrencywalletapp.databinding.ActivityMainBinding
+import com.example.cryptocurrencywalletapp.domain.model.Coin
+import com.example.cryptocurrencywalletapp.presentation.coinDetails.CoinDetailActivity
 import com.example.cryptocurrencywalletapp.presentation.coinList.CoinListAdapter
 import com.example.cryptocurrencywalletapp.presentation.coinList.CoinListState
 import com.example.cryptocurrencywalletapp.presentation.coinList.CoinListViewModel
@@ -18,19 +23,22 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity(), SearchView.OnQueryTextListener {
     private val viewModel: CoinListViewModel by viewModels()
-    private val adapter = CoinListAdapter()
     private lateinit var binding: ActivityMainBinding
+    private lateinit var adapter: CoinListAdapter
     override fun getToolbarTitle() = "Crypto APP"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        adapter = CoinListAdapter(onSelectClickListener)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.recyclerView.adapter = adapter
         binding.searchView.setOnQueryTextListener(this)
+
         viewModel.currentStockPriceAsLiveData.observe(this) { uiState ->
             if (uiState != null) {
                 render(uiState)
+
             }
         }
 
@@ -51,6 +59,8 @@ class MainActivity : BaseActivity(), SearchView.OnQueryTextListener {
                 binding.textViewResult.setGone()
                 adapter.addData(state.coinList)
             } is CoinListState.Error ->{
+                binding.searchView.setGone()
+                binding.textViewResult.setVisible()
                 binding.progressBar.setGone()
                 binding.recyclerView.setGone()
                 binding.textViewResult.text = state.error
@@ -59,6 +69,12 @@ class MainActivity : BaseActivity(), SearchView.OnQueryTextListener {
 
     }
     }
+        private val onSelectClickListener: (Coin) -> Unit = { clickedCoin ->
+            val intent = CoinDetailActivity.newIntent(applicationContext, clickedCoin)
+            startActivity(intent)
+        }
+
+
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         adapter.filter.filter(query)

@@ -1,3 +1,2 @@
 /build
-/src/main/res/raw/credientals.json
-/src/main/java/com/example/cryptocurrencywalletapp/utils/IConstants.kt
+/src/main/java/com/example/cryptocurrencywalletapp/utils/Credientals.kt

@@ -11,7 +11,7 @@ import com.example.cryptocurrencywalletapp.databinding.RecyclerviewItemCoinBindi
 import com.example.cryptocurrencywalletapp.domain.model.Coin
 import java.text.NumberFormat
 
-class CoinListAdapter : RecyclerView.Adapter<CoinListAdapter.ViewHolder>(), Filterable {
+class CoinListAdapter(private val onSelect: (Coin) -> Unit) : RecyclerView.Adapter<CoinListAdapter.ViewHolder>(), Filterable {
     private val formatter: NumberFormat = NumberFormat.getCurrencyInstance()
     var allCoinList: List<Coin>? = null
     var coinList: MutableList<Coin>? = null
@@ -41,6 +41,9 @@ class CoinListAdapter : RecyclerView.Adapter<CoinListAdapter.ViewHolder>(), Filt
         name.text = coin.name
         val currentPriceFormatted: String = formatter.format(coin.price)
         currentPrice.text = currentPriceFormatted
+        recyclerItem.setOnClickListener{
+                onSelect(coinList!![position])
+        }
     }
 
     override fun getFilter(): Filter {

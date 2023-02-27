@@ -1,15 +1,14 @@
 package com.example.cryptocurrencywalletapp.domain.repository
 
-import androidx.lifecycle.LiveData
-import com.example.cryptocurrencywalletapp.data.remote.dto.WalletDTO
+import com.example.cryptocurrencywalletapp.data.local.WalletEntity
 
 interface WalletRepository {
 
-    suspend fun getAllWallets(): List<WalletDTO>
+    suspend fun getAllWallets(): List<WalletEntity>
 
-    suspend fun insertWallet(walletDTO: WalletDTO)
+    suspend fun insertWallet(walletEntity: WalletEntity)
 
-    suspend fun deleteWallet(walletDTO: WalletDTO)
+    suspend fun deleteWallet(walletEntity: WalletEntity)
 
     suspend fun updateWallet(id: Int?, title: String?, coins: List<String>)
 }

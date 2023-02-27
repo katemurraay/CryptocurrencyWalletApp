@@ -1,9 +1,16 @@
 package com.example.cryptocurrencywalletapp.di
 
+import android.app.Application
+import androidx.room.Room
+
+import com.example.cryptocurrencywalletapp.data.local.CryptoDatabase
 import com.example.cryptocurrencywalletapp.data.remote.CoinAPI
 import com.example.cryptocurrencywalletapp.data.repository.CoinRepositoryImpl
 import com.example.cryptocurrencywalletapp.domain.repository.CoinRepository
+import com.example.cryptocurrencywalletapp.utils.Credientals.API_KEY_NAME
+import com.example.cryptocurrencywalletapp.utils.Credientals.API_KEY_VALUE
 import com.example.cryptocurrencywalletapp.utils.IConstants
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +20,9 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
+
 
 
 @Module
@@ -21,14 +30,14 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun providePaprikaApi(): CoinAPI {
+    fun provideCoinApi(): CoinAPI {
+
         val interceptor = Interceptor { chain ->
             val newRequest: Request =
-                chain.request().newBuilder().addHeader(IConstants.API_KEY_NAME, IConstants.API_KEY_VALUE).build()
+                chain.request().newBuilder().addHeader(API_KEY_NAME, API_KEY_VALUE).build()
             chain.proceed(newRequest)
         }
 
-        // Add the interceptor to OkHttpClient
 
         // Add the interceptor to OkHttpClient
         val builder = OkHttpClient.Builder()
@@ -46,9 +55,24 @@ object AppModule {
 
     }
 
+
     @Provides
     @Singleton
-    fun provideCoinRepository(api: CoinAPI): CoinRepository {
-        return CoinRepositoryImpl(api)
+    fun provideCryptoDatabase(app: Application): CryptoDatabase {
+        return Room.databaseBuilder(
+            app,
+            CryptoDatabase::class.java,
+            "cryptoDB.db"
+        ).build()
     }
+    @Provides
+    @Singleton
+    fun provideCoinInfoRepository(
+        db: CryptoDatabase,
+        api: CoinAPI
+    ): CoinRepository {
+        return CoinRepositoryImpl(api, db)
+    }
+
+
 }
