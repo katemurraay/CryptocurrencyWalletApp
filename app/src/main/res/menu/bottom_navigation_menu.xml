@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:id="@+id/profileActivity"
+        android:icon="@drawable/ic_account"
+        android:title="Profile"/>
+    <item android:id="@+id/coinListActivity"
+        android:icon="@drawable/ic_coins"
+        android:title="Coins"/>
+    <item android:title="Wallet"
+        android:icon="@drawable/ic_wallet"
+        android:id="@+id/walletActivity"/>
+</menu>

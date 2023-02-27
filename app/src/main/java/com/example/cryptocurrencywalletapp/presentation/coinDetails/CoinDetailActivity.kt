@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.cryptocurrencywalletapp.R
 import com.example.cryptocurrencywalletapp.databinding.ActivityCoinDetailBinding
 import com.example.cryptocurrencywalletapp.domain.model.Coin
 import com.example.cryptocurrencywalletapp.presentation.BaseActivity
@@ -17,8 +18,9 @@ class CoinDetailActivity : BaseActivity() {
             intent.getParcelableExtra<Coin>(EXTRA_USE_CASE_CATEGORY)
         }
     }
-    override fun getToolbarTitle() = "Crypto APP"
+
     private lateinit var binding: ActivityCoinDetailBinding
+    override fun getBottomIcon(): Int = R.id.coinListActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

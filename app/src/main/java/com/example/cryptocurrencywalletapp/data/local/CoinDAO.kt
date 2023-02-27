@@ -6,7 +6,7 @@ interface CoinDAO {
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun insertCoin(coinEntity: CoinEntity)
 
-        @Query("SELECT * FROM coin_table ORDER BY USD ASC")
+        @Query("SELECT * FROM coin_table ORDER BY USD DESC")
         suspend fun getCoins(): List<CoinEntity>
 
         @Query("DELETE FROM coin_table")

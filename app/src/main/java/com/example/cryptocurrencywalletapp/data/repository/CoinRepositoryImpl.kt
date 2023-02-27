@@ -39,9 +39,11 @@ class CoinRepositoryImpl @Inject constructor(
 
                try{
                     val response = api.getCoins().toList()
+                    val filteredResponse = response.filter { it.isCrypto ==1 }
                     db.withTransaction {
                         dao.clearCoinListings()
-                        val coinEntities = response.map{it.toCoinEntity()}
+                        val coinEntities = filteredResponse.map{it.toCoinEntity()}
+
                         dao.insertCoinListings(coinEntities)
                     }
                    val coins = dao.getCoins().map{it.toCoin()}

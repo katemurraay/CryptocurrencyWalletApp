@@ -2,35 +2,32 @@ package com.example.cryptocurrencywalletapp.presentation
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
 import com.example.cryptocurrencywalletapp.R
-import com.example.cryptocurrencywalletapp.databinding.ActivityMainBinding
+import com.example.cryptocurrencywalletapp.databinding.ActivityCoinListBinding
 import com.example.cryptocurrencywalletapp.domain.model.Coin
 import com.example.cryptocurrencywalletapp.presentation.coinDetails.CoinDetailActivity
 import com.example.cryptocurrencywalletapp.presentation.coinList.CoinListAdapter
 import com.example.cryptocurrencywalletapp.presentation.coinList.CoinListState
 import com.example.cryptocurrencywalletapp.presentation.coinList.CoinListViewModel
-import com.example.cryptocurrencywalletapp.utils.Resource
 import com.example.cryptocurrencywalletapp.utils.setGone
 import com.example.cryptocurrencywalletapp.utils.setVisible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity(), SearchView.OnQueryTextListener {
+class CoinListActivity : BaseActivity(), SearchView.OnQueryTextListener {
     private val viewModel: CoinListViewModel by viewModels()
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityCoinListBinding
     private lateinit var adapter: CoinListAdapter
-    override fun getToolbarTitle() = "Crypto APP"
+    override fun getBottomIcon(): Int = R.id.coinListActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = CoinListAdapter(onSelectClickListener)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityCoinListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.recyclerView.adapter = adapter
         binding.searchView.setOnQueryTextListener(this)
@@ -83,6 +80,13 @@ class MainActivity : BaseActivity(), SearchView.OnQueryTextListener {
     override fun onQueryTextChange(newText: String?): Boolean {
         adapter.filter.filter(newText)
         return false
+    }
+
+    companion object {
+         fun newIntent(context: Context) =
+            Intent(context, CoinListActivity::class.java).apply {
+
+            }
     }
 
 }
