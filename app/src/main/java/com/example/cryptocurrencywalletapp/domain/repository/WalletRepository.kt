@@ -1,14 +1,16 @@
 package com.example.cryptocurrencywalletapp.domain.repository
 
-import com.example.cryptocurrencywalletapp.data.local.WalletEntity
+import com.example.cryptocurrencywalletapp.domain.model.Wallet
+import com.example.cryptocurrencywalletapp.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
 interface WalletRepository {
 
-    suspend fun getAllWallets(): List<WalletEntity>
+    fun getAllWallets(): Flow<Resource<List<Wallet>>>
 
-    suspend fun insertWallet(walletEntity: WalletEntity)
+    suspend fun insertWallet(wallet: Wallet)
 
-    suspend fun deleteWallet(walletEntity: WalletEntity)
+    suspend fun deleteWallet(wallet: Wallet)
 
     suspend fun updateWallet(id: Int?, title: String?, coins: List<String>)
 }

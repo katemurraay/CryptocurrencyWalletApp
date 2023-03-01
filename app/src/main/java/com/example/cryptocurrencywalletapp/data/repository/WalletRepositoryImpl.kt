@@ -1,32 +1,50 @@
 package com.example.cryptocurrencywalletapp.data.repository
 
-import com.example.cryptocurrencywalletapp.data.local.WalletDAO
-import com.example.cryptocurrencywalletapp.data.local.WalletEntity
+import com.example.cryptocurrencywalletapp.data.local.wallet.WalletDAO
+import com.example.cryptocurrencywalletapp.data.mapper.toWallet
+import com.example.cryptocurrencywalletapp.data.mapper.toWalletEntity
 import com.example.cryptocurrencywalletapp.domain.model.Wallet
 import com.example.cryptocurrencywalletapp.domain.repository.WalletRepository
-import kotlinx.coroutines.CoroutineScope
+import com.example.cryptocurrencywalletapp.utils.Resource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import java.io.IOException
+
 import javax.inject.Inject
 
 class WalletRepositoryImpl @Inject constructor(
-    private val walletDAO: WalletDAO, private val scope: CoroutineScope,) :WalletRepository{
+    private val walletDAO: WalletDAO
+) :WalletRepository{
 
 
 
-    override suspend fun getAllWallets(): List<WalletEntity> {
+    override fun getAllWallets(): Flow<Resource<List<Wallet>>> {
+    return flow {
+        try {
+            emit(Resource.Loading(false))
 
-        return walletDAO.getWallets()
+        } catch (e: IOException){
+            e.printStackTrace()
+            emit(Resource.Error(e.toString()))
+
+        }
     }
 
-    override suspend fun insertWallet(walletEntity: WalletEntity) {
-      walletDAO.insertWallet(walletEntity)
     }
 
-    override suspend fun deleteWallet(walletEntity: WalletEntity) {
+
+    override suspend fun insertWallet(wallet: Wallet) {
+        val walletEntity = wallet.toWalletEntity()
+        walletDAO.insertWallet(walletEntity)
+    }
+
+    override suspend fun deleteWallet(wallet: Wallet) {
+        val walletEntity = wallet.toWalletEntity()
         walletDAO.deleteWallet(walletEntity)
     }
 
     override suspend fun updateWallet(id: Int?, title: String?, coins: List<String>) {
-       walletDAO.updateWallet(id, title, coins)
+       walletDAO.updateWallet(id, title)
     }
 
 

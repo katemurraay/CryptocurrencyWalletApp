@@ -37,7 +37,7 @@ class CoinListAdapter(private val onSelect: (Coin) -> Unit) : RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder.binding){
         val coin = coinList?.get(position) ?: return@with
-        rank.text = coin.id
+        rank.text = coin.symbol
         name.text = coin.name
         val currentPriceFormatted: String = formatter.format(coin.price)
         currentPrice.text = currentPriceFormatted
@@ -54,7 +54,7 @@ class CoinListAdapter(private val onSelect: (Coin) -> Unit) : RecyclerView.Adapt
                     val filteredList =  mutableListOf<Coin>()
                     allCoinList
                         ?.filter {
-                            (it.id.contains(constraint!!)) or
+                            (it.symbol.contains(constraint!!)) or
                                     (it.name.contains(constraint))
 
                         }

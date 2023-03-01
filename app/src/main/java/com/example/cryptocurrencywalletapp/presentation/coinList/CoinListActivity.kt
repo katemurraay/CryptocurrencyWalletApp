@@ -1,21 +1,21 @@
-package com.example.cryptocurrencywalletapp.presentation
+package com.example.cryptocurrencywalletapp.presentation.coinList
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.*
 import com.example.cryptocurrencywalletapp.R
 import com.example.cryptocurrencywalletapp.databinding.ActivityCoinListBinding
 import com.example.cryptocurrencywalletapp.domain.model.Coin
+import com.example.cryptocurrencywalletapp.presentation.BaseActivity
 import com.example.cryptocurrencywalletapp.presentation.coinDetails.CoinDetailActivity
-import com.example.cryptocurrencywalletapp.presentation.coinList.CoinListAdapter
-import com.example.cryptocurrencywalletapp.presentation.coinList.CoinListState
-import com.example.cryptocurrencywalletapp.presentation.coinList.CoinListViewModel
 import com.example.cryptocurrencywalletapp.utils.setGone
 import com.example.cryptocurrencywalletapp.utils.setVisible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class CoinListActivity : BaseActivity(), SearchView.OnQueryTextListener {
@@ -23,6 +23,9 @@ class CoinListActivity : BaseActivity(), SearchView.OnQueryTextListener {
     private lateinit var binding: ActivityCoinListBinding
     private lateinit var adapter: CoinListAdapter
     override fun getBottomIcon(): Int = R.id.coinListActivity
+    override fun getAnimationFile(): Int = R.raw.crypto_coins
+
+    override fun getKeyBoard(): Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,14 +35,21 @@ class CoinListActivity : BaseActivity(), SearchView.OnQueryTextListener {
         binding.recyclerView.adapter = adapter
         binding.searchView.setOnQueryTextListener(this)
 
-        viewModel.currentStockPriceAsLiveData.observe(this) { uiState ->
-            if (uiState != null) {
-                render(uiState)
-
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.currentCoinData.observe(this@CoinListActivity, Observer {
+                    render(it)
+                })
             }
         }
 
+
+
+
+
     }
+
+
 
     private fun render(state: CoinListState){
         when (state){
@@ -72,8 +82,8 @@ class CoinListActivity : BaseActivity(), SearchView.OnQueryTextListener {
         }
 
 
-
     override fun onQueryTextSubmit(query: String?): Boolean {
+
         adapter.filter.filter(query)
         return false
     }
@@ -88,7 +98,6 @@ class CoinListActivity : BaseActivity(), SearchView.OnQueryTextListener {
 
             }
     }
-
 }
 
 

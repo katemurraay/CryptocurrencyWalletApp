@@ -6,7 +6,9 @@ import androidx.room.Room
 import com.example.cryptocurrencywalletapp.data.local.CryptoDatabase
 import com.example.cryptocurrencywalletapp.data.remote.CoinAPI
 import com.example.cryptocurrencywalletapp.data.repository.CoinRepositoryImpl
+import com.example.cryptocurrencywalletapp.data.repository.UserRepositoryImpl
 import com.example.cryptocurrencywalletapp.domain.repository.CoinRepository
+import com.example.cryptocurrencywalletapp.domain.repository.UserRepository
 import com.example.cryptocurrencywalletapp.utils.Credientals.API_KEY_NAME
 import com.example.cryptocurrencywalletapp.utils.Credientals.API_KEY_VALUE
 import com.example.cryptocurrencywalletapp.utils.IConstants
@@ -72,6 +74,14 @@ object AppModule {
         api: CoinAPI
     ): CoinRepository {
         return CoinRepositoryImpl(api, db)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserInfoRepository(
+        db: CryptoDatabase
+    ): UserRepository {
+        return UserRepositoryImpl(db)
     }
 
 

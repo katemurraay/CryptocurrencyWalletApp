@@ -1,6 +1,8 @@
-package com.example.cryptocurrencywalletapp.data.local
+package com.example.cryptocurrencywalletapp.data.local.coin
 
 import androidx.room.*
+import com.example.cryptocurrencywalletapp.data.local.coin.CoinEntity
+
 @Dao
 interface CoinDAO {
         @Insert(onConflict = OnConflictStrategy.REPLACE)

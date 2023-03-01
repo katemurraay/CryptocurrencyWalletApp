@@ -21,6 +21,8 @@ class CoinDetailActivity : BaseActivity() {
 
     private lateinit var binding: ActivityCoinDetailBinding
     override fun getBottomIcon(): Int = R.id.coinListActivity
+    override fun getKeyBoard(): Boolean = false
+    override fun getAnimationFile(): Int =0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

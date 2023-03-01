@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".presentation.userWallet.WalletActivity">
+        <include layout="@layout/lottie_animation" />
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -1,19 +1,19 @@
 package com.example.cryptocurrencywalletapp.data.mapper
 
-import com.example.cryptocurrencywalletapp.data.local.WalletEntity
+import com.example.cryptocurrencywalletapp.data.local.wallet.WalletEntity
 import com.example.cryptocurrencywalletapp.domain.model.Wallet
 
 fun WalletEntity.toWallet(): Wallet {
     return Wallet(
-        id = id,
+        id =walletId,
         title = title,
-        coins = coins?.split(",")
+        userCreatorId = userCreatorId
     )
 }
 
-fun Wallet.toWalletEntity(): WalletEntity{
+fun Wallet.toWalletEntity(): WalletEntity {
     return WalletEntity(
         title = title,
-        coins = coins?.joinToString(separator = ",")
+        userCreatorId = userCreatorId
     )
 }

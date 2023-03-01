@@ -1,6 +1,6 @@
 package com.example.cryptocurrencywalletapp.data.mapper
 
-import com.example.cryptocurrencywalletapp.data.local.CoinEntity
+import com.example.cryptocurrencywalletapp.data.local.coin.CoinEntity
 import com.example.cryptocurrencywalletapp.data.remote.dto.CoinDTO
 import com.example.cryptocurrencywalletapp.data.remote.dto.CoinExchangeDTO
 import com.example.cryptocurrencywalletapp.domain.model.Coin
@@ -9,21 +9,21 @@ import kotlin.math.roundToInt
 
 fun CoinEntity.toCoin(): Coin {
     return Coin(
-        id = symbol,
+        symbol = symbol,
         isCrypto = 1,
         name = name,
         price =(((priceUSD?.times(100.0))?.roundToInt() ?: 0) / 100.0)
     )
 }
 
-fun Coin.toCoinEntity(): CoinEntity{
+fun Coin.toCoinEntity(): CoinEntity {
     return CoinEntity(
-        symbol = id,
+        symbol = symbol,
         name = name,
         priceUSD = price,
          )
 }
-fun CoinDTO.toCoinEntity(): CoinEntity{
+fun CoinDTO.toCoinEntity(): CoinEntity {
     return CoinEntity(
         symbol = assetId,
         name = name,
@@ -39,7 +39,7 @@ fun CoinExchangeDTO.toCoinExchange(): CoinExchange {
 }
 fun CoinDTO.toCoin(): Coin {
     return Coin(
-        id = assetId,
+        symbol = assetId,
         isCrypto = isCrypto,
         name = name,
         price = (price * 100.0).roundToInt() / 100.0,)

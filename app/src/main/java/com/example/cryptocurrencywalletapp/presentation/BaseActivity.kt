@@ -2,24 +2,50 @@ package com.example.cryptocurrencywalletapp.presentation
 
 import android.content.Context
 import android.content.Intent
-
+import android.graphics.Rect
+import android.view.View
+import android.view.ViewTreeObserver
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import com.airbnb.lottie.LottieAnimationView
 import com.example.cryptocurrencywalletapp.R
-import com.example.cryptocurrencywalletapp.presentation.coinDetails.CoinDetailActivity
+import com.example.cryptocurrencywalletapp.presentation.coinList.CoinListActivity
 import com.example.cryptocurrencywalletapp.presentation.userProfile.ProfileActivity
 import com.example.cryptocurrencywalletapp.presentation.userWallet.WalletActivity
 import com.example.cryptocurrencywalletapp.utils.setGone
+import com.example.cryptocurrencywalletapp.utils.setVisible
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
+
+
 
 abstract class BaseActivity : AppCompatActivity() {
+    var mKeyboardVisible: Boolean = false
     abstract fun getBottomIcon(): Int
+
+    abstract fun getAnimationFile(): Int
+
+    abstract fun getKeyBoard(): Boolean
+
+    private fun setKeyBoard(inView: Boolean){
+        mKeyboardVisible = inView
+    }
+
+   private fun setAnimationFile(file: Int){
+       val animationView = getLottieAnimation()
+       animationView.setAnimation(file)
+       animationView.playAnimation()
+   }
+    private fun getLottieAnimation(): LottieAnimationView = findViewById(R.id.animation_view)
+
    private fun setBottomIcon(id: Int){
         getBottomNavigation().selectedItemId = id
     }
     private fun getBottomNavigation(): BottomNavigationView = findViewById(R.id.bottom_navigation)
+    private fun getContentView(): View = window.decorView.findViewById(android.R.id.content)
     override fun onStart() {
         super.onStart()
+        setKeyBoard(getKeyBoard())
+        setAnimationFile(getAnimationFile())
         setBottomIcon(getBottomIcon())
         getBottomNavigation().setOnItemSelectedListener{
 
@@ -46,7 +72,57 @@ abstract class BaseActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun closeKeyboard(view: View){
+        val im = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        im.hideSoftInputFromWindow(view.windowToken, 0)
     }
+
+     private fun  setLayoutKeyboardVisibilityListener() :ViewTreeObserver.OnGlobalLayoutListener {
+            val mLayoutKeyboardVisibilityListener = ViewTreeObserver.OnGlobalLayoutListener {
+                val rectangle = Rect()
+                val contentView: View = getContentView()
+                contentView.getWindowVisibleDisplayFrame(rectangle)
+                val screenHeight = contentView.rootView.height
+
+
+                val keypadHeight: Int = screenHeight - rectangle.bottom
+
+                val isKeyboardNowVisible = keypadHeight > screenHeight * 0.15
+                if (mKeyboardVisible != isKeyboardNowVisible) {
+                    if (isKeyboardNowVisible) {
+                        onKeyboardShown()
+                    } else {
+                        onKeyboardHidden()
+                    }
+                }
+                mKeyboardVisible = isKeyboardNowVisible
+            }
+        return mLayoutKeyboardVisibilityListener
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getContentView().viewTreeObserver.addOnGlobalLayoutListener {
+            setLayoutKeyboardVisibilityListener()
+        }
+    }
+    override fun onPause() {
+        super.onPause()
+        getContentView().viewTreeObserver.removeOnGlobalLayoutListener {
+                setLayoutKeyboardVisibilityListener()
+            }
+    }
+    private fun onKeyboardShown() {
+     getBottomNavigation().setGone()
+    }
+
+    private fun onKeyboardHidden() {
+        getBottomNavigation().setVisible()
+    }
+
+}
+
 
 
 

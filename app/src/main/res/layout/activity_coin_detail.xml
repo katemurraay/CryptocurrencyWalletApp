@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         tools:context=".presentation.coinDetails.CoinDetailActivity"
         android:orientation="vertical">
-        <include layout="@layout/toolbar" />
+        <include layout="@layout/lottie_animation" />
 
         <TextView
             android:layout_width="match_parent"
