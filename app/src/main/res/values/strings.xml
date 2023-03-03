@@ -21,4 +21,13 @@
     <string name="et_email">user@gmail.com</string>
     <string name="tv_registered">Already Registered?</string>
 
+
+    <!--User Profile-->
+    <string name="btn_edit_user">Edit Details</string>
+    <!--Update-->
+    <string name="btn_update">Update</string>
+    <string name="btn_cancel">Exit</string>
+    <string name="tv_update">Update User Details</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -12,6 +12,7 @@ import com.example.cryptocurrencywalletapp.domain.repository.UserRepository
 import com.example.cryptocurrencywalletapp.utils.Credientals.API_KEY_NAME
 import com.example.cryptocurrencywalletapp.utils.Credientals.API_KEY_VALUE
 import com.example.cryptocurrencywalletapp.utils.IConstants
+import com.example.cryptocurrencywalletapp.utils.IConstants.DATABASE_NAME
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -22,7 +23,6 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 
@@ -64,8 +64,8 @@ object AppModule {
         return Room.databaseBuilder(
             app,
             CryptoDatabase::class.java,
-            "cryptoDB.db"
-        ).build()
+            DATABASE_NAME
+        ).fallbackToDestructiveMigration().build()
     }
     @Provides
     @Singleton

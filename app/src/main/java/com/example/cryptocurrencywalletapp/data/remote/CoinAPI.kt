@@ -15,7 +15,8 @@ interface CoinAPI {
     @GET("v1/assets")
     suspend fun getCoins():  MutableList<CoinDTO>
 
-    @GET("v1/exchangerate/{coinId}?invert=false")
-    suspend fun getCoinExchangeInfo(@Path("coinId") coinOne: String): CoinExchangeDTO
+    @GET("v1/exchangerate/{coinBase}/{coinQuote}")
+    suspend fun getCoinExchangeInfo(@Path("coinBase") coinOne: String, @Path("coinQuote")coinQuote:String): CoinExchangeDTO
+
 }
 

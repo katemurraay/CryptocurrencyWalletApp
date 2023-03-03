@@ -8,8 +8,7 @@ interface UserRepository {
     fun getUserByUsername(username: String): Flow<Resource<User>>
 
 
-    suspend fun updateUserDetails(user: User)
-
+     fun updateUserDetails(user: User):  Flow<Resource<User>>
     fun registerUser(user: User): Flow<Resource<User>>
 
     fun loginUser(username: String, password: String): Flow<Resource<User>>

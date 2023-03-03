@@ -9,7 +9,8 @@ import java.time.format.DateTimeFormatter
 object IConstants {
         const val BASE_URL = "https://rest.coinapi.io/"
         const val API_ERROR_TAG = "API ERROR"
-        const val DATABASE_NAME = "crypto_database"
+        const val DATABASE_NAME = "crypto.db"
+        const val WALLET_DIALOG_FUNCTION = "WALLET_DIALOG_FUNCTION"
 
 
 

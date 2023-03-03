@@ -17,7 +17,7 @@ class RegisterViewModel@Inject constructor(
     lateinit var registerData: LiveData<RegistrationState>
 
     fun onValidateRegistration(user:User) {
-        registerData =    userRepository.registerUser(user).map{result ->
+        registerData = userRepository.registerUser(user).map{result ->
             when (result) {
                 is Resource.Success -> {
                     CryptoApplication.user = result.data

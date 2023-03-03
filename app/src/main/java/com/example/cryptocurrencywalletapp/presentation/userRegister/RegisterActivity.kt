@@ -13,6 +13,7 @@ import com.example.cryptocurrencywalletapp.presentation.coinList.CoinListActivit
 import com.example.cryptocurrencywalletapp.utils.toEditable
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.sql.Timestamp
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
@@ -38,7 +39,7 @@ class RegisterActivity : AppCompatActivity() {
                     email = email,
                     image = image,
                     surname = surname,
-                    joined = System.currentTimeMillis().toString()
+                    joined = Timestamp(System.currentTimeMillis()).toString()
                 )
                 lifecycleScope.launch {
 

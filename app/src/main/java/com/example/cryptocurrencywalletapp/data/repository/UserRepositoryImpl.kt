@@ -40,9 +40,23 @@ class UserRepositoryImpl @Inject constructor(
 
 
 
-    override suspend fun updateUserDetails(user: User){
-       val userEntity = user.toUserEntity()
-        dao.updateUser(id = userEntity.userId, name = userEntity.name, username = userEntity.username, password= userEntity.password, email = userEntity.email, image_url = userEntity.image_url)
+    override fun updateUserDetails(user: User):Flow<Resource<User>> {
+        return flow {
+            emit(Resource.Loading())
+            try {
+                val userEntity = user.toUserEntity()
+                dao.updateUser(id = userEntity.userId, name = userEntity.name, username = userEntity.username, password= userEntity.password, email = userEntity.email, image_url = userEntity.image_url)
+                val response = dao.getUserByUsername(user.username)
+                if (response == null) {
+                    emit(Resource.Error("User Update Failed"))
+                } else{
+                    emit(Resource.Success(response.toUser()))
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+                emit(Resource.Error(e.toString()))
+            }
+          }
     }
 
     override  fun registerUser(user: User): Flow<Resource<User>> {
@@ -64,8 +78,7 @@ class UserRepositoryImpl @Inject constructor(
                 }
 
             } catch (e: IOException) {
-                Log.d("IOEXCEPTION", e.toString())
-
+                e.printStackTrace()
                 emit(Resource.Error(e.toString()))
             }
         }
