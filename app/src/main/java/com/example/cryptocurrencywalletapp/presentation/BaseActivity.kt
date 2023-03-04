@@ -11,7 +11,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.example.cryptocurrencywalletapp.R
 import com.example.cryptocurrencywalletapp.presentation.coinList.CoinListActivity
 import com.example.cryptocurrencywalletapp.presentation.userProfile.ProfileActivity
-import com.example.cryptocurrencywalletapp.presentation.userWallet.WalletActivity
+import com.example.cryptocurrencywalletapp.presentation.walletList.WalletListActivity
 import com.example.cryptocurrencywalletapp.utils.setGone
 import com.example.cryptocurrencywalletapp.utils.setVisible
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -65,7 +65,7 @@ abstract class BaseActivity : AppCompatActivity() {
         when(strActivity) {
             "Profile" -> intent = ProfileActivity.newIntent(applicationContext)
             "Coin" -> intent = CoinListActivity.newIntent(applicationContext)
-            "Wallet" -> intent = WalletActivity.newIntent(applicationContext)
+            "Wallet" -> intent = WalletListActivity.newIntent(applicationContext)
         }
         if (intent !=null)  {
             startActivity(intent)

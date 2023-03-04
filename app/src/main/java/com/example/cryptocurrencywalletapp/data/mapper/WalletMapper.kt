@@ -1,5 +1,6 @@
 package com.example.cryptocurrencywalletapp.data.mapper
 
+import androidx.compose.ui.Modifier
 import com.example.cryptocurrencywalletapp.data.local.wallet.WalletEntity
 import com.example.cryptocurrencywalletapp.data.local.wallet.WalletWithCoinsRelationship
 import com.example.cryptocurrencywalletapp.domain.model.Wallet
@@ -19,3 +20,11 @@ fun Wallet.toWalletEntity(): WalletEntity {
         userCreatorId = userCreatorId
     )
 }
+    fun WalletEntity.toWallet(userId: Long): Wallet {
+        return Wallet(
+            id = walletId,
+            title = title,
+            userCreatorId = userId,
+            coins = emptyList()
+        )
+    }

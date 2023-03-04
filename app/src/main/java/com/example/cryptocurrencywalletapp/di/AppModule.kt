@@ -7,8 +7,10 @@ import com.example.cryptocurrencywalletapp.data.local.CryptoDatabase
 import com.example.cryptocurrencywalletapp.data.remote.CoinAPI
 import com.example.cryptocurrencywalletapp.data.repository.CoinRepositoryImpl
 import com.example.cryptocurrencywalletapp.data.repository.UserRepositoryImpl
+import com.example.cryptocurrencywalletapp.data.repository.WalletRepositoryImpl
 import com.example.cryptocurrencywalletapp.domain.repository.CoinRepository
 import com.example.cryptocurrencywalletapp.domain.repository.UserRepository
+import com.example.cryptocurrencywalletapp.domain.repository.WalletRepository
 import com.example.cryptocurrencywalletapp.utils.Credientals.API_KEY_NAME
 import com.example.cryptocurrencywalletapp.utils.Credientals.API_KEY_VALUE
 import com.example.cryptocurrencywalletapp.utils.IConstants
@@ -82,6 +84,14 @@ object AppModule {
         db: CryptoDatabase
     ): UserRepository {
         return UserRepositoryImpl(db)
+    }
+
+    @Provides
+    @Singleton
+    fun provideWalletRepository(
+        db: CryptoDatabase
+    ): WalletRepository {
+        return WalletRepositoryImpl(db)
     }
 
 

@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".presentation.userWallet.WalletActivity">
+        android:id="@+id/linear_layout_wallet_list"
+        tools:context=".presentation.walletList.WalletListActivity">
         <include layout="@layout/lottie_animation" />
 
         <RelativeLayout
@@ -22,18 +23,33 @@
                 android:id="@+id/coinListContent"
                 android:orientation="vertical">
 
-                <TextView
+                <ProgressBar
+                    android:id="@+id/progress_bar_wallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="32dp"
+                    android:visibility="invisible" />
+
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_view_title"/>
-
+                    android:id="@+id/button_insert"
+                    android:text="@string/btn_insert"/>
 
                 <TextView
-                    android:id="@+id/textViewResult"
+                    android:id="@+id/text_view_result"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/primary_text"
                     android:textSize="16sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_wallets"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/recyclerview_item_coin"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </LinearLayout>
             <include layout="@layout/bottom_navigation" />

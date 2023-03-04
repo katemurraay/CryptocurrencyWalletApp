@@ -11,6 +11,7 @@ object IConstants {
         const val API_ERROR_TAG = "API ERROR"
         const val DATABASE_NAME = "crypto.db"
         const val WALLET_DIALOG_FUNCTION = "WALLET_DIALOG_FUNCTION"
+        const val WALLET_DIALOG_WALLET_OBJ = "WALLET_OBJECT"
 
 
 

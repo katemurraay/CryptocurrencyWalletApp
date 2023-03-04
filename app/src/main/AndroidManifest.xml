@@ -31,7 +31,7 @@
             android:name=".presentation.userProfile.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.userWallet.WalletActivity"
+            android:name=".presentation.walletList.WalletListActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.coinDetails.CoinDetailActivity"

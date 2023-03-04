@@ -53,7 +53,7 @@ class WalletRepositoryImpl @Inject constructor(
     //TO DO
 
 
-    override fun insertWallet(wallet: Wallet): Flow<Resource<List<Wallet>>>{
+    override fun insertWallet(wallet: Wallet): Flow<Resource<Wallet>>{
         return flow{
             emit(Resource.Loading())
             try {
@@ -67,7 +67,7 @@ class WalletRepositoryImpl @Inject constructor(
                 val data = userWallets.wallets.map {
                     it.toWallet()
                 }
-                emit(Resource.Success(data))
+                emit(Resource.Success(data.last()))
             } catch (e: IOException){
                 e.printStackTrace()
                 emit(Resource.Error(e.toString()))
@@ -81,13 +81,14 @@ class WalletRepositoryImpl @Inject constructor(
             val coins = wallet.coins
             try {
                 db.withTransaction {
-                    val walletEntity = wallet.toWalletEntity()
-                    dao.deleteWallet(walletEntity)
-                    coins!!.map {
+                    dao.deleteWallet(wallet.id!!)
+                    if (!coins.isNullOrEmpty()){
+                    coins.map {
                         val coinId = coinDAO.getCoinsBySymbol(it.symbol).coinId
                         val walletCoinCrossRefEntity =
-                            WalletCoinCrossRefEntity(walletEntity.walletId!!, coinId!!)
+                            WalletCoinCrossRefEntity(wallet.id!!, coinId!!)
                         walletWithCoinsDao.deleteWalletWithCoins(walletCoinCrossRefEntity)
+                    }
                     }
                 }
                 val userWallets = dao.getUsersWithWallets(userId = CryptoApplication.user?.userId!!)
@@ -105,15 +106,13 @@ class WalletRepositoryImpl @Inject constructor(
 
 
 
-  override fun updateWallet(id: Long?, title: String?): Flow<Resource<List<Wallet>>>{
+  override fun updateWallet(id: Long?, title: String?, userId: Long): Flow<Resource<Wallet>>{
      return flow {
          emit(Resource.Loading())
          try{
              dao.updateWallet(id, title)
-             val userWallets = dao.getUsersWithWallets(userId = CryptoApplication.user?.userId!!)
-             val data = userWallets.wallets.map {
-                 it.toWallet()
-             }
+             val userWallets = dao.getWalletById(id)
+             val data = userWallets.toWallet(userId)
              emit(Resource.Success(data))
          } catch(e: IOException){
              e.printStackTrace()

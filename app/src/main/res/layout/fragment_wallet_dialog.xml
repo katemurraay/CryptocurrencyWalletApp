@@ -1,14 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.userWallet.WalletDialogFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".presentation.walletList.WalletDialogFragment">
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <LinearLayout
+            android:padding="25sp"
+            android:layout_margin="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textAlignment="center"
+    android:theme="@style/FontSizeSmall"
+    android:textColor="@android:color/holo_red_dark"
+    android:id="@+id/text_view_error"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_title"
+                android:theme="@style/FontSizeSmall"/>
+            <EditText
+                android:minHeight="48dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/FontSizeSmall"
+                android:hint="@string/et_title"
+                android:inputType="text"
+                android:id="@+id/edit_text_title"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:orientation="horizontal">
+                <Button
 
-</FrameLayout>
+                    android:background="@color/c_grey"
+                    android:textColor="@color/white"
+                    android:padding="15sp"
+                    android:theme="@style/FontSizeSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_cancel"
+                    android:id="@+id/button_cancel"/>
+                <Button
+                    android:background="@color/c_grey"
+                    android:textColor="@color/white"
+                    android:theme="@style/FontSizeSmall"
+                    android:padding="15sp"
+                    android:layout_marginStart="10sp"
+                    android:text="@string/btn_update"
+                    android:layout_width="150sp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button_add_or_update"/>
+            </LinearLayout>
+
+        </LinearLayout>
+</androidx.cardview.widget.CardView>
+    </FrameLayout>
+</layout>

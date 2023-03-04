@@ -24,10 +24,14 @@
 
     <!--User Profile-->
     <string name="btn_edit_user">Edit Details</string>
-    <!--Update-->
+    <!--Update User-->
     <string name="btn_update">Update</string>
     <string name="btn_cancel">Exit</string>
     <string name="tv_update">Update User Details</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Wallet Dialog-->
+    <string name="tv_title">Title: </string>
+    <string name="et_title">Title </string>
+    <string name="btn_insert">Insert</string>
+
 </resources>

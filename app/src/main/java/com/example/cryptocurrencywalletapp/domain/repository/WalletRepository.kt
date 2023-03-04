@@ -8,12 +8,11 @@ import kotlinx.coroutines.flow.Flow
 interface WalletRepository {
 
     fun getAllWallets(): Flow<Resource<List<Wallet>>>
-    fun insertWallet(wallet: Wallet): Flow<Resource<List<Wallet>>>
+    fun insertWallet(wallet: Wallet): Flow<Resource<Wallet>>
 
     fun deleteWallet(wallet: Wallet): Flow<Resource<List<Wallet>>>
 
-    fun updateWallet(id: Long?, title: String?): Flow<Resource<List<Wallet>>>
-
+    fun updateWallet(id: Long?, title: String?, userId: Long): Flow<Resource<Wallet>>
     fun addCoinToWallet(coin: Coin, walletId: Long): Flow<Resource<Wallet>>
     fun removeCoinFromWallet(coin: Coin, walletId: Long): Flow<Resource<Wallet>>
 }
