@@ -34,4 +34,8 @@
     <string name="et_title">Title </string>
     <string name="btn_insert">Insert</string>
 
+    <!-- Add Coin to Wallet Dialog-->
+    <string name="btn_add_coin">Add Coin to Wallet</string>
+    <string name="tv_wallets">Wallets</string>
+
 </resources>

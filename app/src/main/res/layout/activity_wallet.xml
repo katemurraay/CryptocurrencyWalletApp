@@ -11,8 +11,6 @@
         android:orientation="vertical"
         android:id="@+id/linear_layout_wallet_list"
         tools:context=".presentation.walletList.WalletListActivity">
-        <include layout="@layout/lottie_animation" />
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

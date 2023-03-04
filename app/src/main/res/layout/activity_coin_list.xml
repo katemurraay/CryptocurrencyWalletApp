@@ -16,8 +16,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".presentation.coinList.CoinListActivity">
-        <include layout="@layout/lottie_animation" />
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

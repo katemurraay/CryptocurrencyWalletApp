@@ -18,7 +18,7 @@ class ProfileActivity : BaseActivity() {
     private lateinit var binding: ActivityProfileBinding
     override fun getBottomIcon(): Int = R.id.profileActivity
     override fun getKeyBoard(): Boolean = false
-    override fun getAnimationFile(): Int = R.raw.crypto_coins
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)

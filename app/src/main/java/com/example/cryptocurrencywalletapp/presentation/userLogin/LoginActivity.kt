@@ -2,10 +2,12 @@ package com.example.cryptocurrencywalletapp.presentation.userLogin
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import com.example.cryptocurrencywalletapp.R
 import com.example.cryptocurrencywalletapp.databinding.ActivityLoginBinding
 import com.example.cryptocurrencywalletapp.presentation.coinList.CoinListActivity
 import com.example.cryptocurrencywalletapp.presentation.userRegister.RegisterActivity
@@ -24,7 +26,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val fromBottom = AnimationUtils.loadAnimation(this, R.anim.anim_from_bottom)
+        binding.relativeLayoutSplash.animate().translationY(-1700f).setDuration(800).startDelay = 2000;
 
+        binding.linearLayoutLogin.startAnimation(fromBottom)
         binding.buttonLogin.setOnClickListener {
             if(validateForm()) {
                 val password = binding.editTextPassword.text.toString()

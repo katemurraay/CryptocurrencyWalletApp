@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".presentation.coinDetails.AddCoinToWalletDialogFragment">
+        <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_centerInParent="true"
+    android:layout_height="wrap_content">
+            <LinearLayout
+                android:padding="10sp"
+                android:layout_margin="10sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:textAlignment="center"
+           android:theme="@style/FontSizeLarge"
+           android:text="@string/tv_wallets"
+           android:minHeight="48dp"/>
+ <View
+     android:layout_width="match_parent"
+     android:layout_height="2dp"
+     android:background="@color/c_grey"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:theme="@style/FontSizeSmall"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:id="@+id/text_view_error"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="48dp"
+            android:contentDescription="@string/tv_title"
+            android:text="@string/tv_title"
+            android:theme="@style/FontSizeSmall"
+            android:id="@+id/spinner_user_wallets"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="15sp"
+                    android:layout_margin="15sp"
+                    android:orientation="horizontal">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:text="@string/btn_cancel"
+                        android:id="@+id/button_cancel_coin_to_wallet"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/btn_add_coin"
+                    android:id="@+id/button_add_coin_to_wallet"/>
+                </LinearLayout>
+            </LinearLayout>
+</androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</layout>

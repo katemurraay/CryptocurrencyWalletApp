@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
@@ -29,7 +30,7 @@ class WalletListActivity :  BaseActivity() {
     private val viewModel: WalletListViewModel by viewModels()
     private lateinit var adapter: WalletListAdapter
     override fun getBottomIcon(): Int = R.id.walletActivity
-    override fun getAnimationFile(): Int = R.raw.crypto_coins
+
 
     override fun getKeyBoard(): Boolean =false
     private lateinit var binding: ActivityWalletBinding
@@ -69,6 +70,7 @@ class WalletListActivity :  BaseActivity() {
                 binding.recyclerViewWallets.setVisible()
                 binding.textViewResult.setGone()
                 adapter.addData(state.coinList)
+                Log.d("WALLET_COINS", state.coinList[0].coins.toString())
                 enableSwipeToDelete()
             } is WalletListState.Error ->{
                 binding.textViewResult.setVisible()

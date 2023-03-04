@@ -8,4 +8,9 @@ data class Wallet(
      val id: Long?,
      val userCreatorId: Long,
      val title: String?,
-     val coins: List<Coin>?): Parcelable
+     val coins: List<Coin>?): Parcelable{
+
+     override fun toString(): String {
+          return title!!
+     }
+     }

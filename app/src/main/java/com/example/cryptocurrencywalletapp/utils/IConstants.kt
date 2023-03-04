@@ -12,7 +12,8 @@ object IConstants {
         const val DATABASE_NAME = "crypto.db"
         const val WALLET_DIALOG_FUNCTION = "WALLET_DIALOG_FUNCTION"
         const val WALLET_DIALOG_WALLET_OBJ = "WALLET_OBJECT"
-
+        const val ADD_COIN_TO_WALLET_WALLETS = "ADD_COIN_TO_WALLET_WALLETS"
+        const val ADD_COIN_TO_WALLET_COIN_SYMBOL = "ADD_COIN_TO_WALLET_COIN_SYMBOL "
 
 
 

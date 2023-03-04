@@ -22,7 +22,6 @@ abstract class BaseActivity : AppCompatActivity() {
     var mKeyboardVisible: Boolean = false
     abstract fun getBottomIcon(): Int
 
-    abstract fun getAnimationFile(): Int
 
     abstract fun getKeyBoard(): Boolean
 
@@ -30,12 +29,7 @@ abstract class BaseActivity : AppCompatActivity() {
         mKeyboardVisible = inView
     }
 
-   private fun setAnimationFile(file: Int){
-       val animationView = getLottieAnimation()
-       animationView.setAnimation(file)
-       animationView.playAnimation()
-   }
-    private fun getLottieAnimation(): LottieAnimationView = findViewById(R.id.animation_view)
+
 
    private fun setBottomIcon(id: Int){
         getBottomNavigation().selectedItemId = id
@@ -45,7 +39,6 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         setKeyBoard(getKeyBoard())
-        setAnimationFile(getAnimationFile())
         setBottomIcon(getBottomIcon())
         getBottomNavigation().setOnItemSelectedListener{
 

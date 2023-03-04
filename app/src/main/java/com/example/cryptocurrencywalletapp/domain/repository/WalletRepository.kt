@@ -13,6 +13,6 @@ interface WalletRepository {
     fun deleteWallet(wallet: Wallet): Flow<Resource<List<Wallet>>>
 
     fun updateWallet(id: Long?, title: String?, userId: Long): Flow<Resource<Wallet>>
-    fun addCoinToWallet(coin: Coin, walletId: Long): Flow<Resource<Wallet>>
-    fun removeCoinFromWallet(coin: Coin, walletId: Long): Flow<Resource<Wallet>>
+    fun addCoinToWallet(coinSymbol: String, walletId: Long): Flow<Resource<Wallet>>
+    fun removeCoinFromWallet(coinSymbol: String, walletId: Long): Flow<Resource<Wallet>>
 }

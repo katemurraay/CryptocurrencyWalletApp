@@ -23,7 +23,7 @@ class CoinListActivity : BaseActivity(), SearchView.OnQueryTextListener {
     private lateinit var binding: ActivityCoinListBinding
     private lateinit var adapter: CoinListAdapter
     override fun getBottomIcon(): Int = R.id.coinListActivity
-    override fun getAnimationFile(): Int = R.raw.crypto_coins
+
 
     override fun getKeyBoard(): Boolean = false
 

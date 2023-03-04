@@ -121,11 +121,11 @@ class WalletRepositoryImpl @Inject constructor(
      }
     }
 
-    override fun addCoinToWallet(coin: Coin, walledId: Long): Flow<Resource<Wallet>>{
+    override fun addCoinToWallet(coinSymbol: String, walledId: Long): Flow<Resource<Wallet>>{
         return flow{
             try{
                 db.withTransaction {
-                    val coinEntity = coinDAO.getCoinsBySymbol(coin.symbol)
+                    val coinEntity = coinDAO.getCoinsBySymbol(coinSymbol)
                     val walletCoinCrossRefEntity =
                         WalletCoinCrossRefEntity(walledId, coinEntity.coinId!!)
                     walletWithCoinsDao.insertWalletWithCoins(walletCoinCrossRefEntity)
@@ -141,11 +141,11 @@ class WalletRepositoryImpl @Inject constructor(
         }
         }
 
-    override fun removeCoinFromWallet(coin: Coin, walledId: Long): Flow<Resource<Wallet>>{
+    override fun removeCoinFromWallet(coinSymbol: String, walledId: Long): Flow<Resource<Wallet>>{
         return flow{
             try{
                 db.withTransaction {
-                    val coinEntity = coinDAO.getCoinsBySymbol(coin.symbol)
+                    val coinEntity = coinDAO.getCoinsBySymbol(coinSymbol)
                     val walletCoinCrossRefEntity =
                         WalletCoinCrossRefEntity(walledId, coinEntity.coinId!!)
                     walletWithCoinsDao.deleteWalletWithCoins(walletCoinCrossRefEntity)

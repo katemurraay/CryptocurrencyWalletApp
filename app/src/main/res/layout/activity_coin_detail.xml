@@ -7,13 +7,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
-    <include layout="@layout/bottom_navigation" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.coinDetails.CoinDetailActivity"
         android:orientation="vertical">
-        <include layout="@layout/lottie_animation" />
+
 
         <TextView
             android:layout_width="match_parent"
@@ -36,7 +35,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/text_view_CHY"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_add_coin_to_wallet"
+            android:text="@string/btn_add_coin"/>
     </LinearLayout>
+    <include layout="@layout/bottom_navigation" />
+
 </RelativeLayout>
 
 
