@@ -9,5 +9,4 @@ data class User(
     val firstName: String,
     val surname: String,
     val password: String,
-    val image: String,
     val joined: String?)

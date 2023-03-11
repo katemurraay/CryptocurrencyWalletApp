@@ -2,6 +2,7 @@
     <string name="app_name">CryptocurrencyWalletApp</string>
 
     <!-- Login -->
+    <string name="tv_login">Cryptocurrency Wallet</string>
     <string name="tv_username">Username:</string>
     <string name="et_username">Username</string>
     <string name="tv_password">Password:</string>
@@ -21,13 +22,23 @@
     <string name="et_email">user@gmail.com</string>
     <string name="tv_registered">Already Registered?</string>
 
+    <!-- Coin List-->
+    <string name="sv_hint"> Search for cryptocurrency </string>
+
+    <!-- Coin Details -->
+    <string name="tv_usd">United States Dollar (USD):</string>
+    <string name="tv_gbp">Great British Pound (GBP):</string>
+    <string name="tv_eur">European Union (EURO):</string>
+    <string name="tv_cny">Chinese Yuan (CNY):</string>
+
 
     <!--User Profile-->
     <string name="btn_edit_user">Edit Details</string>
+    <string name="tv_joined">Joined: </string>
     <!--Update User-->
     <string name="btn_update">Update</string>
     <string name="btn_cancel">Exit</string>
-    <string name="tv_update">Update User Details</string>
+    <string name="tv_update">Update Details</string>
 
     <!--Wallet Dialog-->
     <string name="tv_title">Title: </string>

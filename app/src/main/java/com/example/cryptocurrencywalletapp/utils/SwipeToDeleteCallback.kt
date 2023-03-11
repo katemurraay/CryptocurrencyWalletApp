@@ -27,7 +27,7 @@ abstract class SwipeToDeleteCallback internal constructor(context: Context) :
         backgroundColor = Color.parseColor("#b80f0a")
         mClearPaint = Paint()
         mClearPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
-        deleteDrawable = ContextCompat.getDrawable(mContext, R.drawable.ic_delete)
+        deleteDrawable = ContextCompat.getDrawable(mContext, R.drawable.ic_menu_delete)
         intrinsicWidth = deleteDrawable!!.intrinsicWidth
         intrinsicHeight = deleteDrawable.intrinsicHeight
     }
@@ -64,9 +64,9 @@ abstract class SwipeToDeleteCallback internal constructor(context: Context) :
             clearCanvas(
                 c,
                 itemView.right + dX,
-                itemView.top as Float,
-                itemView.right as Float,
-                itemView.bottom as Float
+                itemView.top.toFloat(),
+                itemView.right.toFloat(),
+                itemView.bottom.toFloat()
             )
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             return
@@ -79,7 +79,7 @@ abstract class SwipeToDeleteCallback internal constructor(context: Context) :
             itemView.bottom
         )
         mBackground.draw(c)
-        val deleteIconTop: Int = itemView.getTop() + (itemHeight - intrinsicHeight) / 2
+        val deleteIconTop: Int = itemView.top + (itemHeight - intrinsicHeight) / 2
         val deleteIconMargin = (itemHeight - intrinsicHeight) / 2
         val deleteIconLeft: Int = itemView.right - deleteIconMargin - intrinsicWidth
         val deleteIconRight: Int = itemView.right - deleteIconMargin

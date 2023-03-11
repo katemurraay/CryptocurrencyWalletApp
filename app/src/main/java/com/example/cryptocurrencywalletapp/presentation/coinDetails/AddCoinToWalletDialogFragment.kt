@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.example.cryptocurrencywalletapp.R
 import com.example.cryptocurrencywalletapp.databinding.FragmentAddCoinToWalletDialogBinding
 import com.example.cryptocurrencywalletapp.domain.model.Wallet
 
@@ -43,7 +44,7 @@ class AddCoinToWalletDialogFragment : DialogFragment() {
             dismiss()
         } else{
 
-            adapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item,
+            adapter = ArrayAdapter(requireContext(), R.layout.spinner_item_wallet,
                 userWallets!!)
             binding.spinnerUserWallets.adapter = adapter
         }

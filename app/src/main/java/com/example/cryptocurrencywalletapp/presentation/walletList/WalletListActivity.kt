@@ -70,7 +70,6 @@ class WalletListActivity :  BaseActivity() {
                 binding.recyclerViewWallets.setVisible()
                 binding.textViewResult.setGone()
                 adapter.addData(state.coinList)
-                Log.d("WALLET_COINS", state.coinList[0].coins.toString())
                 enableSwipeToDelete()
             } is WalletListState.Error ->{
                 binding.textViewResult.setVisible()
@@ -115,7 +114,6 @@ class WalletListActivity :  BaseActivity() {
 
     }
     companion object {
-
 
         fun newIntent(context: Context) =
             Intent(context, WalletListActivity::class.java).apply {}

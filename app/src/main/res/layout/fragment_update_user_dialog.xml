@@ -1,45 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.userProfile.UpdateUserDialogFragment">
 
 <androidx.cardview.widget.CardView
+    app:cardBackgroundColor="@color/c_dark_grey"
+    tools:context=".presentation.userProfile.UpdateUserDialogFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <ImageButton
+        android:contentDescription="@string/btn_cancel"
+        android:background="@color/c_dark_grey"
+        app:tint="@color/white"
+        android:padding="15sp"
+        android:layout_gravity="end"
+        android:theme="@style/FontSizeSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_close"
+        android:id="@+id/button_cancel"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <LinearLayout
-        android:padding="25sp"
+        android:padding="15sp"
         android:layout_margin="15sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/FontSizeMedium"
+            android:theme="@style/FontSizeLarge"
             android:textStyle="bold"
+            android:textColor="@color/white"
             android:text="@string/tv_update"
             android:textAlignment="center"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"/>
+        <include layout ="@layout/line_view"/>
         <TextView
+            android:padding="5sp"
+            android:textStyle="bold"
+            android:textColor="@color/c_light_grey"
             android:theme="@style/FontSizeSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tv_f_name"/>
         <EditText
+            android:padding="5sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:inputType="textPersonName"
             android:autofillHints="name"
             android:minHeight="48dp"
@@ -49,12 +68,17 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_text_first_name"/>
         <TextView
-
+            android:padding="5sp"
+            android:textStyle="bold"
+            android:textColor="@color/c_light_grey"
             android:theme="@style/FontSizeSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tv_surname"/>
         <EditText
+            android:padding="5sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:minHeight="48dp"
             android:inputType="textPersonName"
             android:autofillHints="name"
@@ -64,11 +88,17 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_text_last_name"/>
         <TextView
+            android:padding="5sp"
+            android:textStyle="bold"
+            android:textColor="@color/c_light_grey"
             android:theme="@style/FontSizeSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tv_username"/>
         <EditText
+            android:padding="5sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:inputType="text"
             android:autofillHints="username"
             android:minHeight="48dp"
@@ -78,11 +108,17 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_text_username"/>
         <TextView
+            android:padding="5sp"
+            android:textStyle="bold"
+            android:textColor="@color/c_light_grey"
             android:theme="@style/FontSizeSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tv_password"/>
         <EditText
+            android:padding="5sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:inputType="textPassword"
             android:autofillHints="password"
             android:minHeight="48dp"
@@ -93,11 +129,17 @@
             android:id="@+id/edit_text_password"/>
 
         <TextView
+            android:padding="5sp"
+            android:textStyle="bold"
+            android:textColor="@color/c_light_grey"
             android:theme="@style/FontSizeSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tv_email"/>
         <EditText
+            android:padding="5sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:inputType="textEmailAddress"
             android:autofillHints="emailAddress"
             android:minHeight="48dp"
@@ -107,20 +149,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_text_email"/>
 
-        <TextView
-            android:theme="@style/FontSizeSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_image"/>
-        <EditText
-            android:inputType="textUri"
-            android:autofillHints=""
-            android:minHeight="48dp"
-            android:theme="@style/FontSizeSmall"
-            android:hint="@string/et_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/edit_text_image"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -128,29 +157,19 @@
             android:padding="15sp"
             android:layout_margin="20sp"
             android:orientation="horizontal">
+
             <Button
-                android:background="@color/c_grey"
-                android:textColor="@color/white"
-                android:padding="15sp"
-                android:theme="@style/FontSizeSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_cancel"
-                android:id="@+id/button_cancel"/>
-            <Button
-                android:background="@color/c_grey"
+                android:background="@drawable/bg_rounded_button_grey"
                 android:textColor="@color/white"
                 android:theme="@style/FontSizeSmall"
-                android:padding="15sp"
-                android:layout_marginStart="10sp"
                 android:text="@string/btn_update"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/button_update"/>
         </LinearLayout>
             </LinearLayout>
     </ScrollView>
-
+    </LinearLayout>
 </androidx.cardview.widget.CardView>
-    </FrameLayout>
+
 </layout>

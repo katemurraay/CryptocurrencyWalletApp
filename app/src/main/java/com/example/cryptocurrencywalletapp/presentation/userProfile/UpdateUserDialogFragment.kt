@@ -27,7 +27,7 @@ class UpdateUserDialogFragment : DialogFragment() {
         populateForm()
 
         binding.buttonCancel.setOnClickListener {
-            dismiss()
+            this.dismiss()
         }
         binding.buttonUpdate.setOnClickListener {
             if(validateForm()){
@@ -57,7 +57,6 @@ class UpdateUserDialogFragment : DialogFragment() {
         binding.editTextFirstName.text = CryptoApplication.user?.firstName?.toEditable()
         binding.editTextLastName.text = CryptoApplication.user?.surname?.toEditable()
         binding.editTextEmail.text = CryptoApplication.user?.email?.toEditable()
-        binding.editTextImage.text = CryptoApplication.user?.image?.toEditable()
 
     }
     private fun validateRegistration(state: UpdateUserState) {
@@ -82,14 +81,12 @@ class UpdateUserDialogFragment : DialogFragment() {
         val firstName = binding.editTextFirstName.text.toString()
         val surname = binding.editTextLastName.text.toString()
         val email = binding.editTextEmail.text.toString()
-        val image = binding.editTextImage.text.toString()
         return User(
             userId = CryptoApplication.user?.userId,
             password = password,
             username = username,
             firstName = firstName,
             email = email,
-            image = image,
             surname = surname,
             joined = Timestamp(System.currentTimeMillis()).toString()
         )
@@ -99,7 +96,6 @@ class UpdateUserDialogFragment : DialogFragment() {
         return !(binding.editTextPassword.text.toString()
             .isEmpty() || binding.editTextUsername.text.toString()
             .isEmpty() || binding.editTextFirstName.text.toString()
-            .isEmpty() || binding.editTextImage.text.toString()
             .isEmpty() || binding.editTextLastName.text.toString()
             .isEmpty() || binding.editTextEmail.text.toString().isEmpty())
     }

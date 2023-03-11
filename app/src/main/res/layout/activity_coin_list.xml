@@ -12,6 +12,7 @@
     </data>
 
     <LinearLayout
+        android:background="@color/black"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -29,6 +30,12 @@
             <androidx.appcompat.widget.SearchView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:searchIcon="@drawable/ic_search"
+                android:hint="@string/sv_hint"
+                android:background="@drawable/bg_white_rounded"
+                android:layoutDirection="rtl"
+                android:padding="3sp"
+                android:iconifiedByDefault="true"
                 android:id="@+id/search_view"/>
 
             <ProgressBar
@@ -47,6 +54,7 @@
                 android:textSize="16sp" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
+                android:backgroundTint="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:listitem="@layout/recyclerview_item_coin"

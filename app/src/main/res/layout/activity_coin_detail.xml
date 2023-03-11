@@ -6,10 +6,20 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@color/black"
+    android:padding="10sp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        app:cardCornerRadius="2dp"
+        app:cardBackgroundColor="@color/c_dark_grey"
+        android:layout_centerInParent="true">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="15sp"
         tools:context=".presentation.coinDetails.CoinDetailActivity"
         android:orientation="vertical">
 
@@ -17,31 +27,104 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:text="APPLE"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:padding="5sp"
+            android:theme="@style/FontSizeLarge"
             android:id="@+id/text_view_name"/>
+        <include layout="@layout/line_view"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/text_view_USD"/>
+            android:text="@string/tv_usd"
+            android:textColor="@color/c_light_grey"
+            android:textStyle="bold|italic"
+            android:theme="@style/FontSizeMedium"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/text_view_Euro"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/text_view_GBP"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/text_view_CHY"/>
+            android:id="@+id/text_view_USD"
+            android:textStyle="bold"
+            tools:text="APPLE"
+
+            android:textColor="@color/white"
+            android:theme="@style/FontSizeMedium"/>
+
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_gbp"
+                android:textColor="@color/c_light_grey"
+                android:textStyle="bold|italic"
+                android:theme="@style/FontSizeMedium"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_view_GBP"
+                android:textStyle="bold"
+                tools:text="APPLE"
+                android:textColor="@color/white"
+                android:theme="@style/FontSizeMedium"/>
+
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_eur"
+                android:textColor="@color/c_light_grey"
+                android:textStyle="bold|italic"
+                android:theme="@style/FontSizeMedium"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_view_Euro"
+                android:textStyle="bold"
+                tools:text="APPLE"
+
+                android:textColor="@color/white"
+                android:theme="@style/FontSizeMedium"/>
+
+
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_cny"
+                android:textColor="@color/c_light_grey"
+                android:textStyle="bold|italic"
+                android:theme="@style/FontSizeMedium"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_view_CNY"
+                android:textStyle="bold"
+                tools:text="APPLE"
+
+                android:textColor="@color/white"
+                android:theme="@style/FontSizeMedium"/>
+
+
 
         <Button
+            android:layout_marginTop="30dp"
+            android:paddingTop="10dp"
+            android:maxWidth="320dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:theme="@style/FontSizeMedium"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_rounded_button_grey"
             android:id="@+id/button_add_coin_to_wallet"
             android:text="@string/btn_add_coin"/>
     </LinearLayout>
+    </androidx.cardview.widget.CardView>
     <include layout="@layout/bottom_navigation" />
 
 </RelativeLayout>

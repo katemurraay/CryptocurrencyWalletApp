@@ -19,8 +19,8 @@ interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUsers(users: List<UserEntity>)
 
-    @Query("UPDATE user_table SET name = :name, username = :username, email = :email, password = :password, image= :image_url WHERE userId = :id")
-    suspend fun updateUser(id: Long?, name: String?, username: String, password: String, email:String, image_url: String?)
+    @Query("UPDATE user_table SET name = :name, username = :username, email = :email, password = :password WHERE userId = :id")
+    suspend fun updateUser(id: Long?, name: String?, username: String, password: String, email:String)
 }
 
 

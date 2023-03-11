@@ -45,7 +45,7 @@ class UserRepositoryImpl @Inject constructor(
             emit(Resource.Loading())
             try {
                 val userEntity = user.toUserEntity()
-                dao.updateUser(id = userEntity.userId, name = userEntity.name, username = userEntity.username, password= userEntity.password, email = userEntity.email, image_url = userEntity.image_url)
+                dao.updateUser(id = userEntity.userId, name = userEntity.name, username = userEntity.username, password= userEntity.password, email = userEntity.email)
                 val response = dao.getUserByUsername(user.username)
                 if (response == null) {
                     emit(Resource.Error("User Update Failed"))

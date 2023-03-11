@@ -1,5 +1,6 @@
 package com.example.cryptocurrencywalletapp.presentation.userLogin
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AnimationUtils
@@ -29,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
         val fromBottom = AnimationUtils.loadAnimation(this, R.anim.anim_from_bottom)
         binding.relativeLayoutSplash.animate().translationY(-1700f).setDuration(800).startDelay = 2000;
 
-        binding.linearLayoutLogin.startAnimation(fromBottom)
+        binding.relativeLayoutLogin.startAnimation(fromBottom)
         binding.buttonLogin.setOnClickListener {
             if(validateForm()) {
                 val password = binding.editTextPassword.text.toString()
@@ -56,8 +57,6 @@ class LoginActivity : AppCompatActivity() {
                 binding.textViewError.setGone()
             }
             is LoginState.Success ->{
-
-
                 val intent: Intent = CoinListActivity.newIntent(applicationContext)
                 startActivity(intent)
                 finish()
@@ -73,7 +72,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
+    companion object {
+        fun newIntent(context: Context) =
+            Intent(context, LoginActivity::class.java).apply {}
+    }
     private fun validateForm(): Boolean{
         return !(binding.editTextPassword.text.toString().isEmpty()|| binding.editTextUsername.text.toString().isEmpty())
     }

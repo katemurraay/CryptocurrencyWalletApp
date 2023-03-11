@@ -1,5 +1,6 @@
 package com.example.cryptocurrencywalletapp.presentation.coinList
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ class CoinListAdapter(private val onSelect: (Coin) -> Unit) : RecyclerView.Adapt
     private val formatter: NumberFormat = NumberFormat.getCurrencyInstance()
     var allCoinList: List<Coin>? = null
     var coinList: MutableList<Coin>? = null
+    var colors = listOf<String>("#3F51B5","#FF9800","#009688","#673AB7")
     fun addData(list: List<Coin>) {
         allCoinList = list as List<Coin>
         coinList =  allCoinList!!.toMutableList()
@@ -37,11 +39,13 @@ class CoinListAdapter(private val onSelect: (Coin) -> Unit) : RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder.binding){
         val coin = coinList?.get(position) ?: return@with
-        rank.text = coin.symbol
-        name.text = coin.name
+        textViewCoinSymbol.text = coin.symbol
+        textViewCoinName.text = coin.name
         val currentPriceFormatted: String = formatter.format(coin.price)
-        currentPrice.text = currentPriceFormatted
-        recyclerItem.setOnClickListener{
+        textViewPrice.text = currentPriceFormatted
+        var setColor = position % colors.size
+        recyclerCoinItem.setBackgroundColor(Color.parseColor(colors[setColor]))
+        recyclerCoinItem.setOnClickListener{
                 onSelect(coinList!![position])
         }
     }

@@ -13,8 +13,7 @@ fun UserEntity.toUser(): User {
         password = password,
         firstName = this.name.split(" ")[0],
         surname = this.name.split(" ")[1],
-        joined = joinedDate.toDateTime(),
-        image = image_url
+        joined = joinedDate.toDateTime()
     )
 }
 
@@ -25,7 +24,6 @@ fun User.toUserEntity(): UserEntity {
         email = email,
         password = password,
         name = "$firstName $surname",
-        joinedDate = joined?.toDateTime()!!,
-        image_url = image
+        joinedDate = joined?.toDateTime()!!
     )
 }

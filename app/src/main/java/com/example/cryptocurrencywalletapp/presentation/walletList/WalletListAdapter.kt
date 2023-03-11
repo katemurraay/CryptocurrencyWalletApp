@@ -1,5 +1,6 @@
 package com.example.cryptocurrencywalletapp.presentation.walletList
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ class WalletListAdapter(private val onSelect: (Wallet) -> Unit) : RecyclerView.A
 
     var allWalletList: List<Wallet>? = null
     var walletList: MutableList<Wallet>? = null
+    private var colors = listOf<String>("#fed800","#00c1fe", "#b29700","#0087b2","#fe0093")
     fun addData(list: List<Wallet>) {
         allWalletList = list as List<Wallet>
         walletList =  allWalletList!!.toMutableList()
@@ -38,10 +40,7 @@ class WalletListAdapter(private val onSelect: (Wallet) -> Unit) : RecyclerView.A
         notifyItemRemoved(position)
     }
 
-    fun restoreItem(item: Wallet?, position: Int) {
-        walletList?.add(position, item!!)
-        notifyItemInserted(position)
-    }
+
 
     fun getData(): MutableList<Wallet>?{
         return walletList
@@ -51,7 +50,14 @@ class WalletListAdapter(private val onSelect: (Wallet) -> Unit) : RecyclerView.A
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder.binding){
         val wallet = walletList?.get(position) ?: return@with
         textViewTitle.text = wallet.title
-        recyclerItem.setOnClickListener{
+        val coins = wallet.coins?.map { it.name }.toString()
+
+        val coin = coins.replace("[", "").replace("]","");
+        val strCoins = "Coins: $coin"
+        textViewCoins.text = strCoins
+        var setColor = position % colors.size
+        recyclerItemWallet.setBackgroundColor(Color.parseColor(colors[setColor]))
+        recyclerItemWallet.setOnClickListener{
             onSelect(walletList!![position])
         }
     }

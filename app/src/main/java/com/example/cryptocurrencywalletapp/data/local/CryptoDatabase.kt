@@ -11,7 +11,7 @@ import com.example.cryptocurrencywalletapp.data.local.user.UserEntity
 import com.example.cryptocurrencywalletapp.data.local.wallet.*
 
 
-@Database(entities = [WalletEntity::class, CoinEntity::class, UserEntity::class, WalletCoinCrossRefEntity::class, RateEntity::class], version = 3)
+@Database(entities = [WalletEntity::class, CoinEntity::class, UserEntity::class, WalletCoinCrossRefEntity::class, RateEntity::class], version = 4)
 abstract class CryptoDatabase: RoomDatabase() {
 
     abstract fun getWalletDao(): WalletDAO

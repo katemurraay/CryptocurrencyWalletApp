@@ -12,11 +12,15 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.cryptocurrencywalletapp.R
 import com.example.cryptocurrencywalletapp.databinding.ActivityCoinDetailBinding
 import com.example.cryptocurrencywalletapp.domain.model.Coin
+import com.example.cryptocurrencywalletapp.domain.model.CoinExchange
+import com.example.cryptocurrencywalletapp.domain.model.Rate
 import com.example.cryptocurrencywalletapp.presentation.BaseActivity
 import com.example.cryptocurrencywalletapp.presentation.walletList.WalletDialogFragment
 import com.example.cryptocurrencywalletapp.presentation.walletList.WalletListState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
+
 @AndroidEntryPoint
 class CoinDetailActivity : BaseActivity() {
     override fun getBottomIcon(): Int = R.id.coinListActivity
@@ -62,7 +66,9 @@ class CoinDetailActivity : BaseActivity() {
         is CoinDetailState.Success ->{
             coinSymbol = uiState.coinExchange.coin.symbol
             binding.textViewName.text = uiState.coinExchange.coin.name
-            binding.textViewCHY.text = uiState.coinExchange.rates[0].rate.toString()
+            renderCoinDetails(uiState.coinExchange.rates)
+
+
 
         } is CoinDetailState.Error ->{
             binding.textViewName.text = uiState.error
@@ -73,6 +79,31 @@ class CoinDetailActivity : BaseActivity() {
     }
 }
 
+private fun renderCoinDetails(rates: List<Rate>){
+
+    //GET CURRENCY
+    val euro = rates.find { it.symbol == "EUR" }
+    val cny = rates.find { it.symbol == "CNY" }
+    val usd = rates.find { it.symbol =="USD"}
+    val gbp = rates.find { it.symbol == "GBP" }
+
+    //FORMAT CURRENCY (2 DP)
+    val priceEUR  = (((euro?.rate!!.times(100.0))?.roundToInt() ?: 0) / 100.0)
+    val priceCNY  = (((cny?.rate!!.times(100.0))?.roundToInt() ?: 0) / 100.0)
+    val priceUSD  = (((usd?.rate!!.times(100.0))?.roundToInt() ?: 0) / 100.0)
+    val priceGBP  = (((gbp?.rate!!.times(100.0))?.roundToInt() ?: 0) / 100.0)
+
+    //FORMAT CURRENCY (ADD SYMBOL)
+    val strPriceEUR = "€ $priceEUR"
+    val strPriceUSD = "$ $priceUSD"
+    val strPriceGBP = "£ $priceGBP"
+    val strPriceCNY = "¥ $priceCNY"
+
+    binding.textViewEuro.text =  strPriceEUR
+    binding.textViewCNY.text =  strPriceCNY
+    binding.textViewUSD.text =  strPriceUSD
+    binding.textViewGBP.text =  strPriceGBP
+}
     private fun getWalletsAndCoins(){
         viewModel.getUserWallets()
         viewModel.currentUserWallets.observe(this@CoinDetailActivity, Observer{
